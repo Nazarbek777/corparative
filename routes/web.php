@@ -1,10 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CandidantController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\VacancyController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\auth\SuperAdminController;
@@ -25,6 +31,12 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('news', NewsController::class);
     Route::resource('abouts', AboutController::class);
+    Route::resource('blogs', BlogController::class);
+    Route::resource('faqs', FaqController::class);
+    Route::resource('teams', TeamController::class);
+    Route::resource('partners', PartnerController::class);
+    Route::resource('settings', SettingController::class);
+    Route::resource('testimonials', TestimonialController::class);
     Route::resource('contacts', ContactController::class);
     Route::resource('vacancies', VacancyController::class);
     Route::resource('candidants', CandidantController::class);
