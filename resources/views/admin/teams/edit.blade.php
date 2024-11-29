@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <form action="{{ route('news.update', $news->id) }}" method="POST" enctype="multipart/form-data" novalidate class="needs-validation" onsubmit="updateEditorContent()">
+    <form action="{{ route('teams.update', $team->id) }}" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -10,15 +10,15 @@
                 <div class="page-header">
                     <div class="page-header-left d-flex align-items-center">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Редактировать Новость</h5>
+                            <h5 class="m-b-10">Редактировать команду</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Главная</a></li>
-                            <li class="breadcrumb-item">Новости</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admins.dashboard') }}">Главная</a></li>
+                            <li class="breadcrumb-item">Команды</li>
                         </ul>
                     </div>
                     <div class="page-header-right ms-auto">
-                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
                     </div>
                 </div>
 
@@ -37,65 +37,33 @@
                         <div class="col-lg-8">
                             <div class="card stretch">
                                 <div class="card-header">
-                                    <h5 class="card-title">Детали Новости</h5>
+                                    <h5 class="card-title">Детали команды</h5>
                                 </div>
                                 <div class="card-body p-4">
                                     <ul class="nav-tab-items-wrapper nav nav-justified invoice-overview-tab-item">
                                         <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link active" data-bs-toggle="tab" data-bs-target="#uzContent">O'zbekcha</a>
+                                            <a href="#uzContent" class="nav-link active" data-bs-toggle="tab" data-bs-target="#uzContent">O'zbekcha</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link" data-bs-toggle="tab" data-bs-target="#enContent">English</a>
+                                            <a href="#enContent" class="nav-link" data-bs-toggle="tab" data-bs-target="#enContent">English</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link" data-bs-toggle="tab" data-bs-target="#ruContent">Русский</a>
+                                            <a href="#ruContent" class="nav-link" data-bs-toggle="tab" data-bs-target="#ruContent">Русский</a>
                                         </li>
                                     </ul>
-
                                     <div class="tab-content pt-3">
-                                        <div class="tab-pane fade show active" id="uzContent">
-                                            <div class="form-group pb-3">
-                                                <label for="title_uz">Заголовок (UZ):</label>
-                                                <input type="text" class="form-control" id="title_uz" name="title_uz" value="{{ old('title_uz', $news->title_uz) }}" required>
+                                        @foreach (['uz', 'en', 'ru'] as $lang)
+                                            <div class="tab-pane fade show {{ $lang == 'uz' ? 'active' : '' }}" id="{{ $lang }}Content">
+                                                <div class="form-group pb-3">
+                                                    <label for="name_{{ $lang }}">Имя ({{ strtoupper($lang) }}):</label>
+                                                    <input type="text" class="form-control" id="name_{{ $lang }}" name="name_{{ $lang }}" value="{{ old('name_' . $lang, $team->{'name_' . $lang}) }}" required>
+                                                </div>
+                                                <div class="form-group pb-3">
+                                                    <label for="position_{{ $lang }}">Должность ({{ strtoupper($lang) }}):</label>
+                                                    <input type="text" class="form-control" id="position_{{ $lang }}" name="position_{{ $lang }}" value="{{ old('position_' . $lang, $team->{'position_' . $lang}) }}" required>
+                                                </div>
                                             </div>
-
-                                            <div class="form-group pb-3">
-                                                <label for="content_uz">Контент (UZ):</label>
-                                                <div id="editor_uz" style="height:400px;">{!! old('content_uz', $news->content_uz) !!}</div>
-                                                <input type="hidden" id="text_uz" name="content_uz">
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="enContent">
-                                            <div class="form-group pb-3">
-                                                <label for="title_en">Заголовок (EN):</label>
-                                                <input type="text" class="form-control" id="title_en" name="title_en" value="{{ old('title_en', $news->title_en) }}" required>
-                                            </div>
-
-                                            <div class="form-group pb-3">
-                                                <label for="content_en">Контент (EN):</label>
-                                                <div id="editor_en" style="height:400px;">{!! old('content_en', $news->content_en) !!}</div>
-                                                <input type="hidden" id="text_en" name="content_en">
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="ruContent">
-                                            <div class="form-group pb-3">
-                                                <label for="title_ru">Заголовок (RU):</label>
-                                                <input type="text" class="form-control" id="title_ru" name="title_ru" value="{{ old('title_ru', $news->title_ru) }}" required>
-                                            </div>
-
-                                            <div class="form-group pb-3">
-                                                <label for="content_ru">Контент (RU):</label>
-                                                <div id="editor_ru" style="height:400px;">{!! old('content_ru', $news->content_ru) !!}</div>
-                                                <input type="hidden" id="text_ru" name="content_ru">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group pb-3">
-                                        <label for="date">Дата:</label>
-                                        <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $news->date) }}" required>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -103,16 +71,20 @@
                         <div class="col-lg-4">
                             <div class="card stretch">
                                 <div class="card-header">
-                                    <h5 class="card-title">Изображение Новости</h5>
+                                    <h5 class="card-title">Дополнительно</h5>
                                 </div>
                                 <div class="card-body p-4">
                                     <div class="form-group pb-3">
-                                        <label for="image">Изображение:</label>
+                                        <label for="image">Новое изображение:</label>
                                         <input type="file" class="form-control" id="image" name="image">
-                                        @if($news->image)
-                                            <div class="mt-3">
-                                                <img src="{{ asset('storage/' . $news->image) }}" alt="Current Image" style="width: 100%; max-height: 300px;">
+                                    </div>
+                                    <div class="form-group pb-3">
+                                        @if (!empty($team->image))
+                                            <div class="mb-3">
+                                                <img src="{{ asset('storage/' . $team->image) }}" alt="Текущее изображение" class="img-fluid rounded" width="150">
                                             </div>
+                                        @else
+                                            <p class="text-muted">Изображение не загружено.</p>
                                         @endif
                                     </div>
                                 </div>
@@ -122,27 +94,24 @@
                 </div>
             </div>
         </main>
+    </form>
+    <script>
+        // Tillarni o'zgartirish uchun tugmalarni ulash
+        document.querySelectorAll('.nav-link').forEach((tab) => {
+            tab.addEventListener('click', function (e) {
+                // Hozirgi faollikni o'chirish
+                document.querySelectorAll('.tab-pane').forEach((pane) => {
+                    pane.classList.remove('active', 'show');
+                });
 
-        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+                // Yangi tilni faollashtirish
+                const targetId = this.getAttribute('data-bs-target');
+                const targetTab = document.querySelector(targetId);
 
-        <script>
-            var editorUz = new Quill('#editor_uz', { theme: 'snow' });
-            var editorEn = new Quill('#editor_en', { theme: 'snow' });
-            var editorRu = new Quill('#editor_ru', { theme: 'snow' });
-
-            editorUz.root.innerHTML = `{!! old('content_uz', $news->content_uz) !!}`;
-            editorEn.root.innerHTML = `{!! old('content_en', $news->content_en) !!}`;
-            editorRu.root.innerHTML = `{!! old('content_ru', $news->content_ru) !!}`;
-
-            function updateEditorContent() {
-                document.getElementById('text_uz').value = editorUz.root.innerHTML;
-                document.getElementById('text_en').value = editorEn.root.innerHTML;
-                document.getElementById('text_ru').value = editorRu.root.innerHTML;
-            }
-
-            document.querySelector('form').addEventListener('submit', function(event){
-                updateEditorContent();
+                if (targetTab) {
+                    targetTab.classList.add('active', 'show');
+                }
             });
-        </script>
+        });
+    </script>
 @endsection

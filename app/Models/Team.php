@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    /** @use HasFactory<\Database\Factories\TeamFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -17,5 +16,6 @@ class Team extends Model
         'position_uz',
         'position_ru',
         'position_en',
+        'image',
     ];
 }

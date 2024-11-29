@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('position_uz')->nullable();
             $table->text('position_ru')->nullable();
             $table->text('position_en')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

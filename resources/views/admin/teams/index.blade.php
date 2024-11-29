@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Список новостей')
+@section('title', 'Список команд')
 
 @section('content')
     <main class="nxl-container">
@@ -8,11 +8,11 @@
             <div class="page-header">
                 <div class="page-header-left d-flex align-items-center">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Список новостей</h5>
+                        <h5 class="m-b-10">Список команд</h5>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admins.dashboard') }}">Главная</a></li>
-                        <li class="breadcrumb-item">Новости</li>
+                        <li class="breadcrumb-item">Команды</li>
                     </ul>
                 </div>
             </div>
@@ -25,49 +25,47 @@
                             <div class="card-body p-0">
                                 <div class="px-2 py-3">
                                     <div class="d-flex justify-content-between">
-                                        <h4 class="bold">Новости</h4>
+                                        <h4 class="bold">Команды</h4>
                                         <div class="">
                                             <div class="dataTables_filter">
-                                                <a href="{{ route('news.create') }}" class="btn btn-sm btn-primary">Добавить</a>
+                                                <a href="{{ route('teams.create') }}" class="btn btn-sm btn-primary">Добавить</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-hover" id="newsList">
+                                    <table class="table table-hover" id="teamList">
                                         <thead>
                                         <tr>
                                             <th>№</th>
-                                            <th>Заголовок (УЗ)</th>
-                                            <th>Заголовок (РУ)</th>
-                                            <th>Заголовок (АН)</th>
-                                            <th>Дата</th>
-                                            <th>Изображение</th>
+                                            <th>Имя (УЗ)</th>
+                                            <th>Имя (РУ)</th>
+                                            <th>Имя (АН)</th>
+                                            <th>Фото</th>
                                             <th class="text-end">Действия</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($news as $item)
+                                        @foreach ($teams as $team)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->title_uz }}</td>
-                                                <td>{{ $item->title_ru }}</td>
-                                                <td>{{ $item->title_en }}</td>
-                                                <td>{{ $item->date }}</td>
+                                                <td>{{ $team->name_uz }}</td>
+                                                <td>{{ $team->name_ru }}</td>
+                                                <td>{{ $team->name_en }}</td>
                                                 <td>
-                                                    @if ($item->image)
-                                                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title_en }}" width="50">
+                                                    @if ($team->image)
+                                                        <img src="{{ asset('storage/' . $team->image) }}" alt="{{ $team->name_uz }}" width="50">
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <div class="hstack gap-2 justify-content-end">
-                                                        <a href="{{ route('news.show', $item->id) }}" class="avatar-text avatar-md d-none">
+                                                        <a href="{{ route('teams.show', $team->id) }}" class="avatar-text avatar-md d-none">
                                                             <i class="feather feather-eye"></i>
                                                         </a>
-                                                        <a href="{{ route('news.edit', $item->id) }}" class="avatar-text avatar-md">
+                                                        <a href="{{ route('teams.edit', $team->id) }}" class="avatar-text avatar-md">
                                                             <i class="feather feather-edit-3"></i>
                                                         </a>
-                                                        <form action="{{ route('news.destroy', $item->id) }}" method="POST" style="display: inline-block;">
+                                                        <form action="{{ route('teams.destroy', $team->id) }}" method="POST" style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="avatar-text avatar-md" onclick="return confirm('Are you sure?')">

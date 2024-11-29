@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <form action="{{ route('teams.store') }}" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+    <form action="{{ route('faqs.store') }}" method="POST" class="needs-validation" onsubmit="updateEditorContent()">
         @csrf
 
         <main class="nxl-container">
@@ -9,11 +9,11 @@
                 <div class="page-header">
                     <div class="page-header-left d-flex align-items-center">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Создать команду</h5>
+                            <h5 class="m-b-10">Создать FAQ</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admins.dashboard') }}">Главная</a></li>
-                            <li class="breadcrumb-item">Команды</li>
+                            <li class="breadcrumb-item">FAQ</li>
                         </ul>
                     </div>
                     <div class="page-header-right ms-auto">
@@ -33,10 +33,10 @@
 
                 <div class="main-content">
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <div class="card stretch">
                                 <div class="card-header">
-                                    <h5 class="card-title">Детали команды</h5>
+                                    <h5 class="card-title">Детали FAQ</h5>
                                 </div>
                                 <div class="card-body p-4">
                                     <ul class="nav-tab-items-wrapper nav nav-justified invoice-overview-tab-item">
@@ -50,32 +50,21 @@
                                             <a href="#ruContent" class="nav-link" data-bs-toggle="tab" data-bs-target="#ruContent">Русский</a>
                                         </li>
                                     </ul>
+
                                     <div class="tab-content pt-3">
                                         @foreach (['uz', 'en', 'ru'] as $lang)
                                             <div class="tab-pane fade show {{ $lang == 'uz' ? 'active' : '' }}" id="{{ $lang }}Content">
                                                 <div class="form-group pb-3">
-                                                    <label for="name_{{ $lang }}">Имя ({{ strtoupper($lang) }}):</label>
-                                                    <input type="text" class="form-control" id="name_{{ $lang }}" name="name_{{ $lang }}" value="{{ old('name_' . $lang) }}" required>
+                                                    <label for="question_{{ $lang }}">Вопрос ({{ strtoupper($lang) }}):</label>
+                                                    <input type="text" class="form-control" id="question_{{ $lang }}" name="question_{{ $lang }}" value="{{ old('question_' . $lang) }}" required>
                                                 </div>
                                                 <div class="form-group pb-3">
-                                                    <label for="position_{{ $lang }}">Должность ({{ strtoupper($lang) }}):</label>
-                                                    <input type="text" class="form-control" id="position_{{ $lang }}" name="position_{{ $lang }}" value="{{ old('position_' . $lang) }}" required>
+                                                    <label for="answer_{{ $lang }}">Ответ ({{ strtoupper($lang) }}):</label>
+                                                    <div id="editor_{{ $lang }}" style="height:200px;">{!! old('answer_' . $lang) !!}</div>
+                                                    <input type="hidden" id="text_{{ $lang }}" name="answer_{{ $lang }}" value="{{ old('answer_' . $lang) }}">
                                                 </div>
                                             </div>
                                         @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card stretch">
-                                <div class="card-header">
-                                    <h5 class="card-title">Дополнительно</h5>
-                                </div>
-                                <div class="card-body p-4">
-                                    <div class="form-group pb-3">
-                                        <label for="image">Изображение изображение:</label>
-                                        <input type="file" class="form-control" id="image" name="image">
                                     </div>
                                 </div>
                             </div>
@@ -85,24 +74,19 @@
             </div>
         </main>
     </form>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <script>
-        // Tillarni o'zgartirish uchun tugmalarni ulash
-        document.querySelectorAll('.nav-link').forEach((tab) => {
-            tab.addEventListener('click', function (e) {
-                // Hozirgi faollikni o'chirish
-                document.querySelectorAll('.tab-pane').forEach((pane) => {
-                    pane.classList.remove('active', 'show');
-                });
+        @foreach (['uz', 'en', 'ru'] as $lang)
+        var editor{{ ucfirst($lang) }} = new Quill('#editor_{{ $lang }}', { theme: 'snow' });
+        @endforeach
 
-                // Yangi tilni faollashtirish
-                const targetId = this.getAttribute('data-bs-target');
-                const targetTab = document.querySelector(targetId);
-
-                if (targetTab) {
-                    targetTab.classList.add('active', 'show');
-                }
-            });
-        });
+        function updateEditorContent() {
+            @foreach (['uz', 'en', 'ru'] as $lang)
+            document.getElementById('text_{{ $lang }}').value = editor{{ ucfirst($lang) }}.root.innerHTML;
+            @endforeach
+        }
     </script>
-
 @endsection
