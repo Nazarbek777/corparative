@@ -38,10 +38,10 @@ class UserSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        $adminId = DB::table('users')->insertGetId([
-            'full_name' => 'Admin',
-            'email' => 'info@mi.com',
-            'password' => Hash::make('info@mi.com'),
+        DB::table('users')->insertGetId([
+            'full_name' => 'Robes',
+            'email' => 'info@robes.com',
+            'password' => Hash::make('info@robes.com'),
             'role' => 1, // Admin
             'phone' => '987654321',
             'status' => 1,

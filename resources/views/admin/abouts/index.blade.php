@@ -26,11 +26,6 @@
                                 <div class="px-2 py-3">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="bold">О нас</h4>
-                                        <div class="">
-                                            <div class="dataTables_filter">
-                                                <a href="{{ route('abouts.create') }}" class="btn btn-sm btn-primary">Добавить</a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -38,12 +33,8 @@
                                         <thead>
                                         <tr>
                                             <th>№</th>
-                                            <th>Название (УЗ)</th>
                                             <th>Название (РУ)</th>
-                                            <th>Название (АН)</th>
-                                            <th>Описание (УЗ)</th>
                                             <th>Описание (РУ)</th>
-                                            <th>Описание (АН)</th>
                                             <th>Изображение</th>
                                             <th class="text-end">Действия</th>
                                         </tr>
@@ -52,12 +43,8 @@
                                         @foreach ($abouts as $about)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $about->name_uz }}</td>
                                                 <td>{{ $about->name_ru }}</td>
-                                                <td>{{ $about->name_en }}</td>
-                                                <td>{{ Str::limit($about->description_uz, 50) }}</td>
                                                 <td>{{ Str::limit($about->description_ru, 50) }}</td>
-                                                <td>{{ Str::limit($about->description_en, 50) }}</td>
                                                 <td>
                                                     @if ($about->image)
                                                         <img src="{{ asset('storage/' . $about->image) }}" alt="{{ $about->name_en }}" width="50">
@@ -85,6 +72,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @if ($abouts->isEmpty())
+                                    <div class="card-body">
+                                        <p class="text-center">На данный момент About нет.</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

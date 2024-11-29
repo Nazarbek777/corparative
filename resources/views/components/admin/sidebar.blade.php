@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="/dashboard" class="b-brand">
-                <h3 class="logo logo-lg">Аптека 1</h3>
+                <h3 class="logo logo-lg">Robes</h3>
                 <h6 class="logo logo-sm"> </h6>
             </a>
         </div>
@@ -40,27 +40,51 @@
                     </a>
                 </li>
                 <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('faqs.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-help-circle"></i></span> <!-- FAQ icon -->
+                        <span class="nxl-mtext">FAQ</span>
+                    </a>
+                </li>
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('teams.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-users"></i></span> <!-- Team icon -->
+                        <span class="nxl-mtext">Команда</span>
+                    </a>
+                </li>
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('partners.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-users"></i></span> <!-- Partners icon -->
+                        <span class="nxl-mtext">Партнеры</span>
+                    </a>
+                </li>
+{{--                <li class="nxl-item nxl-hasmenu">--}}
+{{--                    <a href="{{ route('settings.index') }}" class="nxl-link">--}}
+{{--                        <span class="nxl-micon"><i class="feather-settings"></i></span> <!-- Settings icon -->--}}
+{{--                        <span class="nxl-mtext">Настройки</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('testimonials.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-message-circle"></i></span> <!-- Testimonials icon -->
+                        <span class="nxl-mtext">Отзывы</span>
+                    </a>
+                </li>
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('contacts.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-phone"></i></span> <!-- Contacts icon -->
+                        <span class="nxl-mtext">Контакты</span>
+                    </a>
+                </li>
+                <li class="nxl-item nxl-hasmenu">
                     <a href="{{ route('vacancies.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-briefcase"></i></span> <!-- Vacancies icon -->
                         <span class="nxl-mtext">Вакансии</span>
                     </a>
                 </li>
                 <li class="nxl-item nxl-hasmenu">
-                    <a href="{{ route('contacts.index') }}" class="nxl-link">
-                        <span class="nxl-micon"><i class="feather-phone"></i></span> <!-- Contact icon -->
-                        <span class="nxl-mtext">Контакты</span>
-                    </a>
-                </li>
-                <li class="nxl-item nxl-hasmenu">
                     <a href="{{ route('candidants.index') }}" class="nxl-link">
-                        <span class="nxl-micon"><i class="feather-users"></i></span> <!-- Candidants icon -->
+                        <span class="nxl-micon"><i class="feather-user-check"></i></span> <!-- Candidants icon -->
                         <span class="nxl-mtext">Кандидаты</span>
-                    </a>
-                </li>
-                <li class="nxl-item nxl-hasmenu">
-                    <a href="{{ route('partners.index') }}" class="nxl-link">
-                        <span class="nxl-micon"><i class="feather-users"></i></span> <!-- Candidants icon -->
-                        <span class="nxl-mtext">Партнеры</span>
                     </a>
                 </li>
             </ul>

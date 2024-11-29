@@ -68,8 +68,10 @@
                                                         <form action="{{ route('teams.destroy', $team->id) }}" method="POST" style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="avatar-text avatar-md" onclick="return confirm('Are you sure?')">
-                                                                <i class="feather feather-trash-2"></i>
+                                                            <button class="border-0 bg-transparent js-delete-btn" type="submit"  onclick="return confirm('Ushbu faoliyatni o‘chirishni xohlaysizmi?')">
+                                                                <a href="javascript:void(0)" class="avatar-text avatar-md" data-bs-toggle="tooltip" data-bs-trigger="hover" title="" data-bs-original-title="O'chirish" aria-label="O'chirish">
+                                                                    <i class="feather-trash-2"></i>
+                                                                </a>
                                                             </button>
                                                         </form>
                                                     </div>
@@ -79,6 +81,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @if ($teams->isEmpty())
+                                    <div class="card-body">
+                                        <p class="text-center">На данный момент Team нет.</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

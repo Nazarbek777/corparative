@@ -38,7 +38,6 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('news', NewsController::class);
     Route::resource('abouts', AboutController::class);
-    Route::resource('blogs', BlogController::class);
     Route::resource('faqs', FaqController::class);
     Route::resource('teams', TeamController::class);
     Route::resource('partners', PartnerController::class);

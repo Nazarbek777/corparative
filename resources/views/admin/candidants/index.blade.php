@@ -50,7 +50,7 @@
                                         @foreach ($candidants as $candidant)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $candidant->vacancy->title_en ?? 'Не указана' }}</td>
+                                                <td>{{ $candidant->vacancy->title_ru ?? 'Не указана' }}</td>
                                                 <td>{{ $candidant->name }}</td>
                                                 <td>{{ $candidant->email }}</td>
                                                 <td>{{ $candidant->phone }}</td>
@@ -66,8 +66,10 @@
                                                         <form action="{{ route('candidants.destroy', $candidant->id) }}" method="POST" style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="avatar-text avatar-md" onclick="return confirm('Are you sure?')">
-                                                                <i class="feather feather-trash-2"></i>
+                                                            <button class="border-0 bg-transparent js-delete-btn" type="submit"  onclick="return confirm('Ushbu faoliyatni o‘chirishni xohlaysizmi?')">
+                                                                <a href="javascript:void(0)" class="avatar-text avatar-md" data-bs-toggle="tooltip" data-bs-trigger="hover" title="" data-bs-original-title="O'chirish" aria-label="O'chirish">
+                                                                    <i class="feather-trash-2"></i>
+                                                                </a>
                                                             </button>
                                                         </form>
                                                     </div>
@@ -77,6 +79,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @if ($candidants->isEmpty())
+                                    <div class="card-body">
+                                        <p class="text-center">На данный момент Candidants нет.</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

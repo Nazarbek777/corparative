@@ -52,7 +52,7 @@
                                             <form action="{{ route('faqs.destroy', $item->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="border-0 bg-transparent js-delete-btn" type="submit" onclick="return confirm('Ushbu savolni o‘chirishni xohlaysizmi?')">
+                                                <button class="border-0 bg-transparent js-delete-btn" type="submit"  onclick="return confirm('Ushbu faoliyatni o‘chirishni xohlaysizmi?')">
                                                     <a href="javascript:void(0)" class="avatar-text avatar-md" data-bs-toggle="tooltip" data-bs-trigger="hover" title="" data-bs-original-title="O'chirish" aria-label="O'chirish">
                                                         <i class="feather-trash-2"></i>
                                                     </a>

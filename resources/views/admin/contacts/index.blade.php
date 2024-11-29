@@ -26,11 +26,6 @@
                                 <div class="px-2 py-3">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="bold">Контакты</h4>
-                                        <div class="">
-                                            <div class="dataTables_filter">
-                                                <a href="{{ route('contacts.create') }}" class="btn btn-sm btn-primary">Добавить</a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -95,6 +90,11 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @if ($contacts->isEmpty())
+                                    <div class="card-body">
+                                        <p class="text-center">На данный момент Contact нет.</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

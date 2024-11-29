@@ -14,32 +14,6 @@ class ContactController extends Controller
         return view('admin.contacts.index', compact('contacts'));
     }
 
-    public function create()
-    {
-        return view('admin.contacts.create');
-    }
-
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'address_uz' => 'nullable|string',
-            'address_ru' => 'nullable|string',
-            'address_en' => 'nullable|string',
-            'email' => 'nullable|email',
-            'phone1' => 'nullable|string',
-            'phone2' => 'nullable|string',
-            'facebook' => 'nullable|url',
-            'instagram' => 'nullable|url',
-            'telegram' => 'nullable|url',
-            'youtube' => 'nullable|url',
-        ]);
-
-        Contact::create($request->all());
-
-        return redirect()->route('contacts.index')->with('success', 'Kontakt muvaffaqiyatli qo\'shildi.');
-    }
-
     public function edit($id)
     {
         $contact = Contact::findOrFail($id);
@@ -65,14 +39,6 @@ class ContactController extends Controller
         $contact->update($request->all());
 
         return redirect()->route('contacts.index')->with('success', 'Kontakt muvaffaqiyatli yangilandi.');
-    }
-
-    public function destroy($id)
-    {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
-
-        return redirect()->route('contacts.index')->with('success', 'Kontakt muvaffaqiyatli o\'chirildi.');
     }
 }
 
