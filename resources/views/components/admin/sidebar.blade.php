@@ -57,6 +57,12 @@
                         <span class="nxl-mtext">Кандидаты</span>
                     </a>
                 </li>
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('partners.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-users"></i></span> <!-- Candidants icon -->
+                        <span class="nxl-mtext">Партнеры</span>
+                    </a>
+                </li>
             </ul>
             <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
                 <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>

@@ -15,15 +15,22 @@ use App\Http\Controllers\Admin\VacancyController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\auth\SuperAdminController;
 use App\Http\Controllers\auth\AdminController;
+use App\Http\Controllers\Frontend\MainController;
 use Illuminate\Support\Facades\Route;
 
 
 //Admin panel login register start
-Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 //Admin panel login register end
 
+Route::get('/', [MainController::class, 'index'])->name('index');
+Route::get('/about', [MainController::class, 'about'])->name('about');
+Route::get('/blog', [MainController::class, 'blog'])->name('blog');
+Route::get('/contact', [MainController::class, 'contact'])->name('contact');
+Route::get('/product', [MainController::class, 'product'])->name('product');
+Route::get('/checkout', [MainController::class, 'checkout'])->name('checkout');
 
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/',[SuperAdminController::class, 'superAdmin'])->name('superAdmin.dashboard');
