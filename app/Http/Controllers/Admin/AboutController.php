@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAboutRequest;
-use App\Http\Requests\UpdateAboutRequest;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
