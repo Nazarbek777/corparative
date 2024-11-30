@@ -146,6 +146,15 @@
                                 <a class="nav-link d-flex justify-content-between position-relative py-xl-0 px-xl-0 text-uppercase fw-semibold ls-1 fs-15px fs-xl-14px"
                                    href="{{route('contact')}}">Contact</a>
                             </li>
+                            <li class="nav-item transition-all-xl-1 py-xl-11 py-0 px-xxl-8 px-xl-6">
+                                <select class="form-select form-select-sm text-uppercase fw-semibold" onchange="changeLanguage(this.value)" style="max-width: 100px !important;">
+                                    <option value="uz" {{ app()->getLocale() == 'uz' ? 'selected' : '' }}>Uz</option>
+                                    <option value="ru" {{ app()->getLocale() == 'ru' ? 'selected' : '' }}>Ru</option>
+                                    <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>En</option>
+                                </select>
+                            </li>
+
+
                         </ul>
                         <div class="icons-actions d-flex justify-content-end ms-auto fs-28px text-white">
                             <div class="px-5 d-none d-xl-inline-block">
@@ -226,3 +235,69 @@
         </div>
     </div>
 </header>
+<script>
+    function changeLanguage(locale) {
+        window.location.href = `/locale/${locale}`;
+    }
+
+</script>
+
+<style>
+    .custom-select-container {
+        position: relative;
+        display: inline-block;
+        max-width: 150px;
+        width: 100%;
+    }
+
+    .custom-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .custom-select:hover {
+        border-color: #007bff;
+        background-color: #f8f9fa;
+    }
+
+    .custom-select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .custom-select-container::after {
+        content: '▼';
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 12px;
+        color: #888;
+    }
+
+    .custom-select:hover + .custom-select-container::after {
+        color: #007bff;
+    }
+    .form-select-sm {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 0.5rem !important;
+        font-size: 0.775rem;
+        border-radius: .1875rem;
+    }
+
+
+</style>

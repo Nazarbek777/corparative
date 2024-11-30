@@ -10,9 +10,9 @@ class MainController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->limit(8);
-        $news = News::latest()->limit(3);
-        return view('frontend.index');
+        $products = Product::all();
+        $news = News::all();
+        return view('frontend.index',compact('products','news'));
     }
     public function about()
     {
@@ -20,7 +20,8 @@ class MainController extends Controller
     }
     public function blog()
     {
-        return view('frontend.blog');
+        $news = News::paginate(3);
+        return view('frontend.blog',compact('news'));
     }
     public function product()
     {

@@ -16,6 +16,7 @@ use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\auth\SuperAdminController;
 use App\Http\Controllers\auth\AdminController;
 use App\Http\Controllers\Frontend\MainController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -48,3 +49,5 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::resource('vacancies', VacancyController::class);
     Route::resource('candidants', CandidantController::class);
 });
+
+Route::get('locale/{lang}',[LocaleController::class, 'setLocale']);
