@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->text('name_uz')->nullable();
-            $table->text('name_ru')->nullable();
-            $table->text('name_en')->nullable();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->string('name_uz')->nullable();
+            $table->string('name_ru')->nullable();
+            $table->string('name_en')->nullable();
+            $table->decimal('price', 15, 2)->nullable();
+            $table->integer('discount')->default(0);
             $table->text('content_uz')->nullable();
             $table->text('content_ru')->nullable();
             $table->text('content_en')->nullable();

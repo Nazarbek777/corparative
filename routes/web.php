@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CandidantController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\FaqController;
