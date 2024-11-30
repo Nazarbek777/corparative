@@ -119,6 +119,14 @@
                                         <label for="image">Изображение:</label>
                                         <input type="file" class="form-control" id="image" name="image">
                                     </div>
+                                    <div class="form-group pb-3">
+                                        <select name="category_id" id="" class="form-control max-select">
+                                            <option value="">Select Category</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -130,8 +138,19 @@
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- Including Select2 library -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
+        $(document).ready(function() {
+            $('.max-select').select2({
+                theme: 'bootstrap-5',
+                placeholder: 'Select...',
+                allowClear: true
+            });
+        });
         var editorUz = new Quill('#editor_uz', { theme: 'snow' });
         var editorEn = new Quill('#editor_en', { theme: 'snow' });
         var editorRu = new Quill('#editor_ru', { theme: 'snow' });

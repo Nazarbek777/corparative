@@ -125,6 +125,18 @@
                                             <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image" width="100" class="mt-2">
                                         @endif
                                     </div>
+                                    <div class="form-group pb-3">
+                                        <label for="category_id">Category</label>
+                                        <select name="category_id" id="category_id" class="form-control max-select">
+                                            <option value="">Select Category</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name_ru }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -136,6 +148,10 @@
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- Including Select2 library -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
         var editorUz = new Quill('#editor_uz', { theme: 'snow' });

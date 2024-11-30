@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\CandidantController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\NewsController;
@@ -35,6 +36,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('/',[SuperAdminController::class, 'superAdmin'])->name('superAdmin.dashboard');
     Route::get('/admin',[AdminController::class, 'admin'])->name('admins.dashboard');
     Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
     Route::resource('news', NewsController::class);
     Route::resource('abouts', AboutController::class);
     Route::resource('faqs', FaqController::class);

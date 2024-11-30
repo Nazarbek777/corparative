@@ -34,6 +34,12 @@
                     </a>
                 </li>
                 <li class="nxl-item nxl-hasmenu">
+                    <a href="{{ route('categories.index') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-box"></i></span>
+                        <span class="nxl-mtext">Category</span>
+                    </a>
+                </li>
+                <li class="nxl-item nxl-hasmenu">
                     <a href="{{ route('products.index') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-box"></i></span> <!-- Products icon -->
                         <span class="nxl-mtext">Продукты</span>
